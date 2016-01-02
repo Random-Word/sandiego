@@ -133,9 +133,10 @@ def get_all_cities(record_df, sf):
         print(record)
 
         lat, lon = shape.points[0]
-        results.append(pool.apply_async(get_city_imgs(IMGS_PER_SOURCE, record["COUNTRY"],
-            record["NAME"], lon, lat)))
-    [r.get() for r in results]
+        append(pool.apply_async(get_city_imgs,[IMGS_PER_SOURCE, record["COUNTRY"],
+            record["NAME"], lon, lat]))
+    p.close()
+    p.join()
 
 def get_all_countries(record_df, sf):
     pass
