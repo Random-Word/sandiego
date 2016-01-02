@@ -112,11 +112,11 @@ print("Loading borders")
 country_shape_file = "../Countries/TM_WORLD_BORDERS_SIMPL-0.3.shp"
 city_shape_file = "../Cities/cities.shp"
 
-if not os.path.exists(shape_file):
-    print("Cannot find " + shape_file)
+if not os.path.exists(city_shape_file):
+    print("Cannot find " + city_shape_file)
     sys.exit()
 
-sf = shapefile.Reader(country_shape_file)
+sf = shapefile.Reader(city_shape_file)
 
 record_df = pd.DataFrame(sf.records(), columns=[e[0] for e in sf.fields[1:]])
 
@@ -140,5 +140,6 @@ def get_all_cities(record_df, sf):
 def get_all_countries(record_df, sf):
     pass
 
+get_all_cities(record_df, sf)
 
 
