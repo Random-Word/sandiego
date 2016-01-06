@@ -6,6 +6,6 @@ import lasagne
 import nolearn
 import os
 
-for root, dirnames, filenames in os.walk('src'):
+for root, dirnames, filenames in os.walk('../imgs'):
     print(dirnames)
     print(filenames)

@@ -26,8 +26,6 @@ SELECTED_CITIES = ['Singapore', 'Sydney', 'Melbourne', 'Tokyo', 'Osaka',
         'Seoul', 'Busan', 'Phnom Penh', 'Palermo', 'Athens', 'Vienna',
         'Prague', 'Warsaw', 'Taipei']
 
-print("Threads: %d"%(multiprocessing.cpu_count()))
-pool = multiprocessing.Pool(multiprocessing.cpu_count())
 
 # Determine if a point is inside a given polygon or not
 # Polygon is a list of (x,y) pairs.
@@ -140,6 +138,10 @@ def get_all_cities(record_df, sf):
 
 def get_all_countries(record_df, sf):
     pass
+
+print("Threads: %d"%(multiprocessing.cpu_count()))
+pool = multiprocessing.Pool(multiprocessing.cpu_count())
+
 
 get_all_cities(record_df, sf)
 
