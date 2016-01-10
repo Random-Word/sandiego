@@ -11,11 +11,11 @@ import getcolor
 import pandas as pd
 import creds
 
-IMGS_PER_SOURCE = 100
+IMGS_PER_SOURCE = 1
 LL_RANGE = 0.1
 API_KEY = creds.API_KEY
 GOOGLE_URL = ("http://maps.googleapis.com/maps/api/streetview?sensor=false&"
-              "size=640x640&fov=120&key=" + API_KEY)
+              "size=128x128&fov=120&key=" + API_KEY)
 SELECTED_COUNTRIES = ['AUS', 'MEX', 'JPN', 'ITA', 'ZAF', 'ESP', 'FRA', 'TUR',
         'SWE', 'ARG', 'THA']
 
@@ -74,7 +74,7 @@ def get_country_imgs(num, country, name, bbox, borders):
 
 def get_city_imgs(num, country, name, lat, lon):
     attempts = 0
-    outfile_base = "../imgs/Cities/"+country+"/"
+    outfile_base = "../imgs/Cities/lowres/"+country+"/"
     if not os.path.exists(outfile_base):
         os.makedirs(outfile_base)
 
