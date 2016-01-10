@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 
 import numpy as np
-import pandas as pd
-import lasagne
-import nolearn as nl
+#import pandas as pd
+#import lasagne
+#import nolearn as nl
 import os
-import scipy as sp
+import scipy.ndimage as spi
+import scipy.misc as spm
 import multiprocessing
 import pickle
 
@@ -18,18 +19,22 @@ SELECTED_CITIES = ['Singapore', 'Sydney', 'Melbourne', 'Tokyo', 'Osaka',
 
 
 def load_imgs(root, filenames):
-    data = np.zeros((len(filenames), 640, 640, 3))
-    labels = np.zeros((len(filenames)))
+    data = np.zeros((len(filenames), 128, 128, 3), dtype=np.float32)
+    labels = np.zeros((len(filenames)), dtype=np.float32)
+    loadedimgs = list()
     results = list()
     for i, f in enumerate(filenames):
         labels[i] = SELECTED_CITIES.index(f.split('_')[0])
-        results.append(pool.apply_async(sp.ndimage.imread, [root+os.sep+f]))
+        loadedimgs.append(pool.apply_async(spi.imread, [root+os.sep+f]))
+    for li in loadedimgs:
+        results.append(pool.apply_async(spm.imresize, [li.get(), (128,128)]))
     for i, r in enumerate(results):
         data[i,...] = r.get()
     np.save("/mnt/data/"+root.split('/')[-1]+"_Data", data)
     np.save("/mnt/data/"+root.split('/')[-1]+"_Labels", labels)
     print(data.shape)
     print(labels.shape)
+    print(data.dtype)
 
 pool = multiprocessing.Pool(multiprocessing.cpu_count())
 

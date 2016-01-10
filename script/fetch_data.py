@@ -11,7 +11,7 @@ import getcolor
 import pandas as pd
 import creds
 
-IMGS_PER_SOURCE = 1
+IMGS_PER_SOURCE = 100
 LL_RANGE = 0.1
 API_KEY = creds.API_KEY
 GOOGLE_URL = ("http://maps.googleapis.com/maps/api/streetview?sensor=false&"
